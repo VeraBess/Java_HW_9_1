@@ -4,303 +4,334 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
-    //ТЕСТЫ ДЛЯ УРОВНЯ ГРОМКОСТИ:
+
+    // ДОПУСТИМЫЙ НОМЕР СТАНЦИИ:
     @Test
-    public void shouldSetVolume() { // проверка текущего уровня звука
-        Radio radio = new Radio();
-        radio.setCurrentVolume(3);
-
-        int expected = 3;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    // Граничные валидные значения. Увеличение громкости:
-    @Test
-    public void increaseVolumeSetMin() {  //увеличение звук 0
-        Radio radio = new Radio();
-        radio.setCurrentVolume(0);
-        radio.increaseVolume();
-
-        int expected = 1;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void increaseVolumeSetMinPositive() {  //увеличение звук 1
-        Radio radio = new Radio();
-        radio.setCurrentVolume(1);
-        radio.increaseVolume();
-
-        int expected = 2;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void increaseVolumeSetMaxPositive() {  //увеличение звук 99
-        Radio radio = new Radio();
-        radio.setCurrentVolume(99);
-        radio.increaseVolume();
-
-        int expected = 100;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void increaseVolumeSetMax() {  //увеличение звук 100
-        Radio radio = new Radio();
-        radio.setCurrentVolume(100);
-        radio.increaseVolume();
-
-        int expected = 100;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    // Граничные не валидные значения. Увеличение громкости:
-    @Test
-    public void increaseVolumeSetMaxNegative() {  //увеличение звук 101 текущий 0
-        Radio radio = new Radio();
-        radio.setCurrentVolume(101);
-        radio.increaseVolume();
-
-        int expected = 1;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void increaseVolumeSetMinNegative() {  //увеличение звук -1 текущий 0
-        Radio radio = new Radio();
-        radio.setCurrentVolume(-1);
-        radio.increaseVolume();
-
-        int expected = 1;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-
-    }
-
-    // Граничные валидные значения. Уменьшение громкости:
-    @Test
-    public void decreaseVolumeSetMin() {  //уменьшение звук 0
-        Radio radio = new Radio();
-        radio.setCurrentVolume(0);
-        radio.decreaseVolume();
-
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void decreaseVolumeSetMinPositive() {  //уменьшение звук 1
-        Radio radio = new Radio();
-        radio.setCurrentVolume(1);
-        radio.decreaseVolume();
-
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void decreaseVolumeSetMaxPositive() {  //уменьшение звук 99
-        Radio radio = new Radio();
-        radio.setCurrentVolume(99);
-        radio.decreaseVolume();
-
-        int expected = 98;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void decreaseVolumeSetMax() {  //уменьшение звук 100
-        Radio radio = new Radio();
-        radio.setCurrentVolume(100);
-        radio.decreaseVolume();
-
-        int expected = 99;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    // Граничные не валидные значения. Уменьшение громкости:
-    @Test
-    public void decreaseVolumeSetMaxNegative() {  //уменьшение звук 101 текущий 0
-        Radio radio = new Radio();
-        radio.setCurrentVolume(101);
-        radio.decreaseVolume();
-
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void decreaseVolumeSetMinNegative() {  //уменьшние звук -1 текущий 0
-        Radio radio = new Radio();
-        radio.setCurrentVolume(-1);
-        radio.decreaseVolume();
-
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    // ТЕСТЫ ДЛЯ НОМЕРА СТАНЦИИ
-    @Test
-    public void shouldSetStation() { // проверка текущего номера станции
+    public void acceptableStation() { // проверка допустимого номера станции
         Radio radio = new Radio();
         radio.setCurrentStation(5);
 
-        int expected = 5;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(5, radio.getCurrentStation());
     }
 
-    // Граничные валидные значения. Увеличение станции
     @Test
-    public void increaseStationSetMin() {  //увеличение станции 0
+    public void minStation() { // минимальный номер станции граничное
+        Radio radio = new Radio();
+        radio.setCurrentStation(0);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void moreMinStationBorder() { // больше минимального номера станции граничное
+        Radio radio = new Radio();
+        radio.setCurrentStation(1);
+
+        Assertions.assertEquals(1, radio.getCurrentStation());
+    }
+
+    @Test
+    public void lessMaxStationBorder() { // меньше максимального номера станции граничное
+        Radio radio = new Radio();
+        radio.setCurrentStation(8);
+
+        Assertions.assertEquals(8, radio.getCurrentStation());
+    }
+
+    @Test
+    public void MaxStation() { // максимальный номер станции граничное
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
+
+        Assertions.assertEquals(9, radio.getCurrentStation());
+    }
+
+    @Test
+    public void moreMaxStationBorderNegative() { // больше максимального номера станции граничное негативное
+        Radio radio = new Radio();
+        radio.setCurrentStation(10);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void lessMinStationBorderNegative() { // меньше минимального номера станции граничное негативное
+        Radio radio = new Radio();
+        radio.setCurrentStation(-1);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void lessMinStationNegative() { // меньше минимального номера станции негативная
+        Radio radio = new Radio();
+        radio.setCurrentStation(-5);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void moreMaxStationNegative() { // больше максимального номера станции негативная
+        Radio radio = new Radio();
+        radio.setCurrentStation(15);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    // МЕТОД УВЕЛИЧЕНИЯ НОМЕРА СТАНЦИИ:
+    @Test
+    public void increaseStation() { //допустимая станция переключение вперед
+        Radio radio = new Radio();
+        radio.setCurrentStation(6);
+        radio.nextStation();
+
+        Assertions.assertEquals(7, radio.getCurrentStation());
+    }
+
+    @Test
+    public void increaseMinStation() {  //минимальная станция переключение вперед граничное
         Radio radio = new Radio();
         radio.setCurrentStation(0);
         radio.nextStation();
 
-        int expected = 1;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(1, radio.getCurrentStation());
     }
 
     @Test
-    public void increaseStationSetMinPositive() {  //увеличение станции 1
+    public void increaseMoreMinStationBorder() {  //больше минимальной станции переключение вперед граничное
         Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.nextStation();
 
-        int expected = 2;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(2, radio.getCurrentStation());
     }
 
     @Test
-    public void increaseStationSetMaxPositive() {  //увеличение станции 8
+    public void increaseLessMaxStationBorder() {  //меньше максимальной станции переключение вперед граничное
         Radio radio = new Radio();
         radio.setCurrentStation(8);
         radio.nextStation();
 
-        int expected = 9;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
-    public void increaseStationSetMax() {  //увеличение станции 9
+    public void increaseMaxStationBorder() {  //максимальная станция переключение вперед граничное
         Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.nextStation();
 
-        int expected = 0;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, radio.getCurrentStation());
     }
 
-    // Граничные невалидные значения. Увеличение станции.
+    // МЕТОД УМЕНЬШЕНИЯ НОМЕРА СТАНЦИИ:
     @Test
-    public void increaseStationSetMaxNegative() {  //увеличение станции 10 текущий 0
+    public void decreaseStation() { //допустимая станция переключение назад
         Radio radio = new Radio();
-        radio.setCurrentStation(10);
-        radio.nextStation();
+        radio.setCurrentStation(6);
+        radio.prevStation();
 
-        int expected = 1;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
-
+        Assertions.assertEquals(5, radio.getCurrentStation());
     }
 
     @Test
-    public void increaseStationSetMinNegative() {  //увеличение станции -1 текущий 0
-        Radio radio = new Radio();
-        radio.setCurrentStation(-1);
-        radio.nextStation();
-
-        int expected = 1;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
-
-    }
-
-    // Граничные валидные значения. Уменьшение станции
-    @Test
-    public void decreaseStationSetMin() {  //уменьшение станции 0
+    public void decraseMinStation() {  //минимальная станция переключение назад граничное
         Radio radio = new Radio();
         radio.setCurrentStation(0);
         radio.prevStation();
 
-        int expected = 9;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
-    public void decreaseStationSetMinPositive() {  //уменьшение станции 1
+    public void decreaseMoreMinStationBorder() {  //больше минимальной станции переключение назад граничное
         Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.prevStation();
 
-        int expected = 0;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void decreaseStationSetMaxPositive() {  //уменьшение станции 8
+    public void decreaseLessMaxStationBorder() {  //меньше максимальной станции переключение назад граничное
         Radio radio = new Radio();
         radio.setCurrentStation(8);
         radio.prevStation();
 
-        int expected = 7;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(7, radio.getCurrentStation());
     }
 
     @Test
-    public void decreaseStationSetMax() {  //уменьшение станции 9
+    public void decreaseMaxStationBorder() {  //максимальная станция переключение назад граничное
         Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.prevStation();
 
-        int expected = 8;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(8, radio.getCurrentStation());
     }
 
-    // Граничные невалидные значения. Уменьшение станции.
+    //ДОПУСТМЫЙ УРОВЕНЬ ГРОМКОСТИ:
     @Test
-    public void decreaseStationSetMaxNegative() {  //уменьшение станции 10 текущий 0
+    public void acceptableVolume() { // проверка допустимого уровня звука
         Radio radio = new Radio();
-        radio.setCurrentStation(10);
-        radio.prevStation();
+        radio.setCurrentVolume(3);
 
-        int expected = 9;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
-
+        Assertions.assertEquals(3, radio.getCurrentVolume());
     }
 
     @Test
-    public void decreaseStationSetMinNegative() {  //уменьшение станции -1 текущий 0
+    public void minVolume() { // минимальный уровень звука граничное
         Radio radio = new Radio();
-        radio.setCurrentStation(-1);
-        radio.prevStation();
+        radio.setCurrentVolume(0);
 
-        int expected = 9;
-        int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
 
+    @Test
+    public void moreMinVolumeBorder() { // больше минимального уровня звука граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(1);
+
+        Assertions.assertEquals(1, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void lessMaxVolumeBorder() { // меньше максимального уровня звука граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(99);
+
+        Assertions.assertEquals(99, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void MaxVolume() { // максимальный уровень звука граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(100);
+
+        Assertions.assertEquals(100, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void moreMaxVolumeBorderNegative() { // больше максимального уровня звука граничное негативное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(101);
+
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void lessMinVolumeBorderNegative() { // меньше минимального уровня звука граничное негативное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(-1);
+
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void lessMinVolumeNegative() { // меньше минимального уровня звука негативная
+        Radio radio = new Radio();
+        radio.setCurrentVolume(-10);
+
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void moreMaxVolumeNegative() { // больше максимального уровня звука негативная
+        Radio radio = new Radio();
+        radio.setCurrentVolume(120);
+
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    //МЕТОД УВЕЛИЧЕНИЯ ГРОМКОСТИ:
+    @Test
+    public void increaseVolume() { //допустимая громкость увеличение
+        Radio radio = new Radio();
+        radio.setCurrentVolume(30);
+        radio.increaseVolume();
+
+        Assertions.assertEquals(31, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void increaseMinVolume() {  //минимальная громкость увеличение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(0);
+        radio.increaseVolume();
+
+        Assertions.assertEquals(1, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void increaseMoreMinVolumeBorder() {  //больше минимальной громкости увеличение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(1);
+        radio.increaseVolume();
+
+        Assertions.assertEquals(2, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void increaseLessMaxVolumeBorder() {  //меньше максимальной громкости увеличение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(99);
+        radio.increaseVolume();
+
+        Assertions.assertEquals(100, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void increaseMaxVolumeBorder() {  //максимальная громкость увеличение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(100);
+        radio.increaseVolume();
+
+        Assertions.assertEquals(100, radio.getCurrentVolume());
+    }
+
+    // МЕТОД УМЕНЬШЕНИЯ ГРОМКОСТИ:
+    @Test
+    public void decreaseVolume() { //допустимая громкость уменьшение
+        Radio radio = new Radio();
+        radio.setCurrentVolume(30);
+        radio.decreaseVolume();
+
+        Assertions.assertEquals(29, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void decreaseMinVolume() {  //минимальная громкость уменьшение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(0);
+        radio.decreaseVolume();
+
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void decreaseMoreMinVolumeBorder() {  //больше минимальной громкости уменьшение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(1);
+        radio.decreaseVolume();
+
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void decreaseLessMaxVolumeBorder() {  //меньше максимальной громкости уменьшение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(99);
+        radio.decreaseVolume();
+
+        Assertions.assertEquals(98, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void decreaseMaxVolumeBorder() {  //максимальная громкость уменьшение граничное
+        Radio radio = new Radio();
+        radio.setCurrentVolume(100);
+        radio.decreaseVolume();
+
+        Assertions.assertEquals(99, radio.getCurrentVolume());
     }
 }

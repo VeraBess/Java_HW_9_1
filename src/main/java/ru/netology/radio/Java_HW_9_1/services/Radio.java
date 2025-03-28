@@ -2,67 +2,66 @@ package ru.netology.radio.Java_HW_9_1.services;
 
 public class Radio {
 
-    // УПРАВЛЕНИЕ ЗВУКОМ
-    public int currentVolume;
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int newCurrentVolume) { //допустимость текущего уровня звука
-        if (newCurrentVolume < 0) {
-            return;
-        }
-        if (newCurrentVolume > 100) {
-            return;
-        }
-        currentVolume = newCurrentVolume;
-    }
-
-    public void increaseVolume() {  // увеличение громкости
-        if (currentVolume < 100) {
-            currentVolume = currentVolume + 1;
-        }
-    }
-
-    public void decreaseVolume() { // уменьшение громкости
-        if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
-        }
-    }
-
-    // УПРАВЛЕНИЕ СТАНЦИЯМИ
-    public int currentStation;
+    private int currentStation; // УПРАВЛЕНИЕ СТАНЦИЯМИ
+    private int currentVolume; // УПРАВЛЕНИЕ ЗВУКОМ
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public void setCurrentStation(int newCurrentStation) { //допустимость номера станции
-        if (newCurrentStation < 0) {
+    public void setCurrentStation(int currentStation) { //допустимая станция и выставление станции через прямое указание п.4 ДЗ
+        if (currentStation < 0) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (currentStation > 9) {
             return;
         }
-        currentStation = newCurrentStation;
+        this.currentStation = currentStation;
     }
 
-    public void nextStation() { //увеличение номера станции
-        if (currentStation < 9) {
-            currentStation = currentStation + 1;
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) { //допустимый уровень звука
+        if (currentVolume < 0) {
+            return;
+        }
+        if (currentVolume > 100) {
+            return;
+        }
+        this.currentVolume = currentVolume;
+    }
+
+    public void nextStation() { //переключение на станцию выше
+        if (currentStation != 9) {
+            currentStation++;
         } else {
             currentStation = 0;
         }
-
     }
 
-    public void prevStation() { //уменьшение номера станции
-        if (currentStation > 0) {
-            currentStation = currentStation - 1;
+    public void prevStation() { //переключение на станцию меньше
+        if (currentStation != 0) {
+            currentStation--;
         } else {
             currentStation = 9;
         }
+    }
 
+    public void increaseVolume() { // увеличение громкости
+        if (currentVolume != 100) {
+            currentVolume++;
+        } else {
+            currentVolume = 100;
+        }
+    }
+
+    public void decreaseVolume() { // уменьшение громкости
+        if (currentVolume != 0) {
+            currentVolume--;
+        } else {
+            currentVolume = 0;
+        }
     }
 }
