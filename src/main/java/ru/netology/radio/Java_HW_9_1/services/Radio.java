@@ -2,8 +2,27 @@ package ru.netology.radio.Java_HW_9_1.services;
 
 public class Radio {
 
-    private int currentStation; // УПРАВЛЕНИЕ СТАНЦИЯМИ
-    private int currentVolume; // УПРАВЛЕНИЕ ЗВУКОМ
+    // УПРАВЛЕНИЕ СТАНЦИЯМИ
+    private int maxStation;
+    private int minStation;
+    private int currentStation = minStation;
+    //  private int currentVolume; // УПРАВЛЕНИЕ ЗВУКОМ
+
+    public Radio(int size) {
+        this.maxStation = size - 1;
+    }
+
+    public Radio() {
+        this.maxStation = 9;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
 
     public int getCurrentStation() {
         return currentStation;
@@ -13,12 +32,12 @@ public class Radio {
         if (currentStation < 0) {
             return;
         }
-        if (currentStation > 9) {
+        if (currentStation > maxStation) {
             return;
         }
         this.currentStation = currentStation;
     }
-
+/*
     public int getCurrentVolume() {
         return currentVolume;
     }
@@ -32,9 +51,9 @@ public class Radio {
         }
         this.currentVolume = currentVolume;
     }
-
+*/
     public void nextStation() { //переключение на станцию выше
-        if (currentStation != 9) {
+        if (currentStation != maxStation) {
             currentStation++;
         } else {
             currentStation = 0;
@@ -45,10 +64,10 @@ public class Radio {
         if (currentStation != 0) {
             currentStation--;
         } else {
-            currentStation = 9;
+            currentStation = maxStation;
         }
     }
-
+/*
     public void increaseVolume() { // увеличение громкости
         if (currentVolume != 100) {
             currentVolume++;
@@ -63,5 +82,5 @@ public class Radio {
         } else {
             currentVolume = 0;
         }
-    }
+    }*/
 }
