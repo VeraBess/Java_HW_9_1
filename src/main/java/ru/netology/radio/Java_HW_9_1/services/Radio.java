@@ -6,7 +6,10 @@ public class Radio {
     private int maxStation;
     private int minStation;
     private int currentStation = minStation;
-    //  private int currentVolume; // УПРАВЛЕНИЕ ЗВУКОМ
+    // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
+    private int maxVolume;
+    private int minVolume;
+    private int currentVolume = minVolume;
 
     public Radio(int size) {
         this.maxStation = size - 1;
@@ -14,6 +17,15 @@ public class Radio {
 
     public Radio() {
         this.maxStation = 9;
+        this.maxVolume = 100;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
     }
 
     public int getMaxStation() {
@@ -37,7 +49,7 @@ public class Radio {
         }
         this.currentStation = currentStation;
     }
-/*
+
     public int getCurrentVolume() {
         return currentVolume;
     }
@@ -51,7 +63,7 @@ public class Radio {
         }
         this.currentVolume = currentVolume;
     }
-*/
+
     public void nextStation() { //переключение на станцию выше
         if (currentStation != maxStation) {
             currentStation++;
@@ -67,7 +79,7 @@ public class Radio {
             currentStation = maxStation;
         }
     }
-/*
+
     public void increaseVolume() { // увеличение громкости
         if (currentVolume != 100) {
             currentVolume++;
@@ -82,5 +94,5 @@ public class Radio {
         } else {
             currentVolume = 0;
         }
-    }*/
+    }
 }
