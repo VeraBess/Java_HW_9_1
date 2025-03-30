@@ -1,5 +1,13 @@
 package ru.netology.radio.Java_HW_9_1.services;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
 
     // УПРАВЛЕНИЕ СТАНЦИЯМИ
@@ -11,7 +19,7 @@ public class Radio {
     private int minVolume;
     private int currentVolume = minVolume;
 
-    public Radio(int size) {
+/*   public Radio(int size) {
         this.maxStation = size - 1;
     }
 
@@ -39,7 +47,7 @@ public class Radio {
     public int getCurrentStation() {
         return currentStation;
     }
-
+*/
     public void setCurrentStation(int currentStation) { //допустимая станция и выставление станции через прямое указание п.4 ДЗ
         if (currentStation < 0) {
             return;
@@ -50,9 +58,9 @@ public class Radio {
         this.currentStation = currentStation;
     }
 
-    public int getCurrentVolume() {
+   /* public int getCurrentVolume() {
         return currentVolume;
-    }
+    }*/
 
     public void setCurrentVolume(int currentVolume) { //допустимый уровень звука
         if (currentVolume < 0) {
