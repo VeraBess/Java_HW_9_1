@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
 
     //ТЕСТЫ ДЛЯ ПОЛЬЗОВАТЕЛЬСКОГО КОЛИЧЕСТВА СТАНЦИЙ:
-    Radio radio = new Radio(40, 0, 0, 100, 0, 0);
+    Radio radio = new Radio(40);
 
     @Test
     void radioStationCount() { // пользовательское кол-во радиостанций

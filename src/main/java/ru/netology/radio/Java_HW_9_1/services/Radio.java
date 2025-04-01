@@ -11,19 +11,19 @@ import lombok.NoArgsConstructor;
 public class Radio {
 
     // УПРАВЛЕНИЕ СТАНЦИЯМИ
-    private int maxStation;
+    private int maxStation = 9;
     private int minStation;
     private int currentStation = minStation;
     // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
-    private int maxVolume;
+    private int maxVolume = 100;
     private int minVolume;
     private int currentVolume = minVolume;
 
-/*   public Radio(int size) {
+    public Radio(int size) {
         this.maxStation = size - 1;
     }
 
-    public Radio() {
+   /* public Radio() {
         this.maxStation = 9;
         this.maxVolume = 100;
     }
@@ -36,6 +36,7 @@ public class Radio {
         return minVolume;
     }
 
+
     public int getMaxStation() {
         return maxStation;
     }
@@ -46,8 +47,8 @@ public class Radio {
 
     public int getCurrentStation() {
         return currentStation;
-    }
-*/
+    }*/
+
     public void setCurrentStation(int currentStation) { //допустимая станция и выставление станции через прямое указание п.4 ДЗ
         if (currentStation < 0) {
             return;
